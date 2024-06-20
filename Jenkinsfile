@@ -42,7 +42,7 @@ pipeline {
                 script {
                     def testResultsDir = "${WORKSPACE}/test-results"
                     sh "mkdir -p ${testResultsDir}" 
-                    sh "dotnet test --logger trx --results-directory ${testResultsDir}" 
+                    sh "dotnet test Clinic.sln --logger trx --results-directory ${testResultsDir}" 
                 }
                 step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
             }
@@ -59,7 +59,7 @@ pipeline {
         stage('Publish Artifacts') {
             steps {
                 script {
-                    sh 'dotnet publish --configuration Release --output ./publish'
+                    sh 'dotnet publish Clinic.sln --configuration Release --output ./publish'
                 }
                 archiveArtifacts artifacts: 'publish/**/*', allowEmptyArchive: true
             }
