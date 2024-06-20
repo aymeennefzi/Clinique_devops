@@ -26,14 +26,14 @@ pipeline {
         stage('Restore') {
             steps {
                 script {
-                    sh 'dotnet restore'
+                    sh 'dotnet restore Clinic..csproj'
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    sh 'dotnet build --configuration Release'
+                    sh 'dotnet build Clinic..csproj --configuration Release'
                 }
             }
         }
