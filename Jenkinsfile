@@ -64,6 +64,33 @@ pipeline {
                 archiveArtifacts artifacts: 'publish/**/*', allowEmptyArchive: true
             }
         }
+        stage('Build Docker Image') {
+             steps {
+                 script {
+                     def dockerImage=docker.build("clynicsys_management" , "-f Dockerfile .")
+                 }
+             }
+        }
+        stage('Push Docker Image to DockerHub') {
+           steps {
+               script {
+                   withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerpwd')]) {
+                       sh '''
+                       docker login -u aymennefzi99 -p "$dockerpwd"
+                       docker tag clynicsys_management:latest aymennefzi99/clynicsys_management:latest
+                       docker push aymennefzi99/clynicsys_management:latest
+                       '''
+                   }
+               }
+           }
+       }
+       stage('Docker compose') {
+           steps {
+               script {
+                   sh 'docker-compose up -d'
+               }
+           }
+       }
         
     }
 }

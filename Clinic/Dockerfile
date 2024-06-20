@@ -1,36 +1,23 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 8089
-
-# Utilisation de l'image SDK pour la construction de l'application
+# Définition de l'image de base pour le build
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-
-# Copie et restauration du projet
-COPY ["Clinic/Clinic.csproj", "Clinic/"]
-RUN dotnet restore "./Clinic/Clinic.csproj"
-
-# Copie de l'ensemble du code source et construction de l'application
-COPY . .
-WORKDIR "/src/Clinic"
-RUN dotnet build "./Clinic.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
-# Publication de l'application
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Clinic.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-# Étape finale pour l'exécution de l'application
-FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
 
-# Installation des outils Entity Framework Core
-RUN dotnet tool install --global dotnet-ef
+# Copie du fichier csproj et restauration des dépendances
+COPY ["Clinic/Clinic.csproj", "Clinic/"]
+RUN dotnet restore "Clinic/Clinic.csproj"
 
-# Configuration du chemin d'accès pour les outils EF Core
-ENV PATH="$PATH:/root/.dotnet/tools"
+# Copie du code source et build de l'application
+COPY . .
+WORKDIR "/app/Clinic"
+RUN dotnet build "Clinic.csproj" -c Release -o /app/build
 
-# Commande d'entrée pour lancer l'application avec la migration de base de données
-ENTRYPOINT ["dotnet", "Clinic.dll", "--migrate"]
+# Définition de l'image de base pour l'exécution
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+WORKDIR /app
+EXPOSE 80
+
+# Copie des fichiers de build depuis le conteneur de build
+COPY --from=build /app/build .
+
+# Commande d'entrée de l'application
+ENTRYPOINT ["dotnet", "Clinic.dll"]
