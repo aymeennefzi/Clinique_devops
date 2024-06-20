@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Frontend') {
             steps {
                 dir('Clinique') {
-                    git url: 'https://github.com/aymeennefzi/Clinique.git', branch: 'master'
+                    git url: 'https://github.com/aymeennefzi/Clinique_devops.git', branch: 'master'
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
                 script {
                     def testResultsDir = "${WORKSPACE}/test-results"
                     sh "mkdir -p ${testResultsDir}" 
-                    sh "dotnet test Clinic.sln --logger trx --results-directory ${testResultsDir}" 
+                    sh "dotnet test --logger trx --results-directory ${testResultsDir}" 
                 }
                 step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
             }
@@ -59,24 +59,11 @@ pipeline {
         stage('Publish Artifacts') {
             steps {
                 script {
-                    sh 'dotnet publish Clinic.sln --configuration Release --output ./publish'
+                    sh 'dotnet publish --configuration Release --output ./publish'
                 }
                 archiveArtifacts artifacts: 'publish/**/*', allowEmptyArchive: true
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def dockerImage = docker.build("clynicsys_management", "-f Dockerfile .")
-                }
-            }
-        }
-        stage('Docker compose') {
-            steps {
-                script {
-                    sh 'docker-compose up -d'
-                }
-            }
-        }
+        
     }
 }
