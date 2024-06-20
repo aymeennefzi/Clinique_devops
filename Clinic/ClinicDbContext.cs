@@ -34,6 +34,10 @@ namespace Clinic.Models
         {
             
         }
+        public ClinicDbContext() : base()
+        {
+
+        }
 
 
     }
