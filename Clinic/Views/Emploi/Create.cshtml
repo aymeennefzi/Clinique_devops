@@ -1,0 +1,1778 @@
+﻿@model Clinic.Models.EmploiViewModel
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>CliniSys</title>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="icon" href="img/favicon.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="~/css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="~/css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- Medipro CSS -->
+
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"><!-- Google Fonts -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="~/css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="~/css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- Medipro CSS -->
+    <link rel="icon" href="img/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="~/css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="~/css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <link rel="stylesheet" href="~/css/style-index.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .header .logo {
+            font-size: 2em;
+            color: var(--black);
+            margin: 20px;
+            margin-bottom: 10px;
+        }
+
+            .header .logo i {
+                margin-top: 15px;
+                color: #1A76D1;
+            }
+.overlay {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 600;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 60%;
+    padding: 10px;
+}
+
+.droppable.hovered {
+    background-color: #e0f7fa;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px; /* Espacement entre les boutons */
+}
+
+.form {
+    --input-text-color: #000;
+    --input-bg-color: #1A76D1;
+    --focus-input-bg-color: transparent;
+    --text-color: #f0f0f0;
+    --active-color: #1A76D1;
+    --width-of-input: 200px;
+    --inline-padding-of-input: 1.3em;
+    --gap: 0.9rem;
+}
+/* form style */
+.form {
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: var(--width-of-input);
+    position: relative;
+    isolation: isolate;
+}
+/* a fancy bg for showing background and border when focus. */
+.fancy-bg {
+    position: absolute;
+    width: 100%;
+    inset: 0;
+    background: var(--input-bg-color);
+    border-radius: 30px;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+/* label styling */
+label {
+    width: 100%;
+    padding: 0.8em;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.search, .close-btn {
+    position: absolute;
+}
+/* styling search-icon */
+.search {
+    fill: var(--text-color);
+    border: none;
+    border-color: #1A76D1;
+}
+/* svg -- size */
+svg {
+    width: 15px;
+    display: block;
+    border: none;
+    border-color: #1A76D1;
+}
+/* styling of close button */
+.close-btn {
+    border: none;
+    right: var(--inline-padding-of-input);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 0.1em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--active-color);
+    opacity: 0;
+    visibility: hidden;
+    border-color: #1A76D1;
+}
+/* styling of input */
+.input {
+    color: #1A76D1;
+    width: 90%;
+    margin-inline: min(2em,calc(var(--inline-padding-of-input) + var(--gap)));
+    background: none;
+    border: none;
+}
+
+.container {
+    margin-top: 35px;
+}
+
+.input:focus {
+    outline: none;
+    border: none;
+ 
+    border-color: #1A76D1;
+}
+
+.input::placeholder {
+    color: var(--text-color);
+    border-color: #1A76D1;
+}
+/* input background change in focus */
+.input:focus ~ .fancy-bg {
+    border: 1px solid #1A76D1;
+    background: var(--focus-input-bg-color);
+}
+/* search icon color change in focus */
+.input:focus ~ .search {
+    fill: var(--active-color);
+    border-color: #1A76D1;
+}
+/* showing close button when typing */
+.input:valid ~ .close-btn {
+    opacity: 1;
+    visibility: visible;
+}
+/* this is for the default background in input,when selecting autofill options -- you can remove this code if you do not want to override the browser style.  */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+}
+
+.bookmarkBtn {
+    width: 102px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1.2px solid #1A76D1;
+    background-color: #1A76D1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+}
+
+.IconContainer {
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(to bottom, white, #ddd);
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition-duration: 0.3s;
+}
+
+.icon {
+    border-radius: 1px;
+}
+
+.textt {
+    height: 100%;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 1;
+    transition-duration: 0.3s;
+    font-size: .7rem;
+}
+
+.bookmarkBtn:hover .IconContainer {
+    width: 80px;
+    transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+    transform: translate(12px);
+    width: 0;
+    font-size: 0;
+    transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+    transform: scale(0.95);
+    transition-duration: 0.3s;
+}
+
+
+.button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #1A76D1;
+    border: none;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px #1A76D1;
+    cursor: pointer;
+    transition-duration: .3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.svgIcon {
+    width: 10px;
+    transition-duration: .3s;
+}
+
+    .svgIcon path {
+        fill: white;
+    }
+
+.button:hover {
+    width: 70px;
+    border-radius: 40px;
+    transition-duration: .3s;
+    background-color: #1A76D1;
+    align-items: center;
+}
+
+    .button:hover .svgIcon {
+        width: 20px;
+        transition-duration: .3s;
+        transform: translateY(75%);
+    }
+
+.button::before {
+    position: absolute;
+    top: -25px;
+    content: "Supprimer";
+    color: white;
+    transition-duration: .3s;
+    font-size: 1px;
+}
+
+.button:hover::before {
+    font-size: 10px;
+    opacity: 1;
+    transform: translateY(30px);
+    transition-duration: .3s;
+}
+
+.Btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: #1A76D1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px #1A76D1;
+}
+
+.svgIcon {
+    fill: white;
+}
+
+.icon2 {
+    width: 15px;
+    height: 5px;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+}
+
+.tooltip {
+    position: absolute;
+    right: -105px;
+    opacity: 0;
+    background-color: #1A76D1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: .2s;
+    pointer-events: none;
+    letter-spacing: 1px;
+}
+
+    .tooltip::before {
+        position: absolute;
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: #1A76D1;
+        background-size: 800%;
+        background-position: center;
+        transform: rotate(45deg);
+        left: -5%;
+        transition-duration: .3s;
+    }
+
+.Btn:hover .tooltip {
+    opacity: 1;
+    transition-duration: .3s;
+}
+
+.Btn:hover {
+    background-color: #1A76D1;
+    transition-duration: .3s;
+}
+
+    .Btn:hover .icon2 {
+        border-bottom: 2px solid rgb(235, 235, 235);
+        border-left: 2px solid rgb(235, 235, 235);
+        border-right: 2px solid rgb(235, 235, 235);
+    }
+
+    .Btn:hover .svgIcon {
+        fill: rgb(255, 255, 255);
+        animation: slide-in-top 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            }
+
+        .header .header-inner .logo {
+            margin: 15px;
+            font-size: 1.5rem;
+            color: #2C2D3F;
+        }
+
+        .header-inner {
+            height: 73px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+  
+
+        .main-menu nav {
+            display: flex;
+        }
+
+        .nav.menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .nav.menu li {
+                margin-left: 20px;
+            }
+
+                .nav.menu li a {
+                    text-decoration: none;
+                    color: #2C2D3F;
+                    font-size: 12px;
+                }
+
+        .btn-dx {
+           
+            margin: 15px;
+        }
+.table-container {
+    overflow: auto;
+    flex: 1; /* Le tableau prendra autant d'espace que possible */
+}
+
+
+.hidden {
+    display: none;
+}
+
+.holiday-box {
+    background: white;
+    border-radius: .5rem;
+    border-color: #1A76D1;
+    font-size: .7rem;
+            padding: 1rem;
+            margin: 1px;
+            margin top:30px;
+        }
+
+            .holiday-box p {
+              color: rgba(0, 0, 0, 0.2);
+        font-size: .7rem;
+                padding: .5rem 0;
+    }
+
+.repos {
+ margin-bottom:0px;
+    display: flex;
+    display: inline-block;
+flex-wrap: nowrap; /* Empêche le retour à la ligne */
+    overflow-x: auto; /* Ajoute une barre de défilement horizontale si nécessaire */
+    max-width: 5000px;
+}
+
+.repo-box {
+margin-top:25px;    font-size: .7rem;
+    background-color: #89898914;
+    border: #1A76D1;
+    padding: .5rem;
+}
+
+
+.date-navigation {
+    display: inline-block;
+    margin: 10px;
+}
+
+.date-navigation .box {
+    width: 120px;
+    border-radius: .5rem;
+    border: solid;
+    border-color: #1A76D1;
+    font-size: .8rem;
+}
+.schedule-table {
+    margin-top: 10px;
+    display: flex;
+   max-height:430px;
+}
+
+
+
+
+.extra-boxes {
+    display: flex;
+    width:140px;
+    padding:1px;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-right: 5px;
+            background-color: #89898914;
+            flex-shrink: 0; /* Empêche les boîtes supplémentaires de rétrécir */
+}
+
+
+table { 
+    width:1100px;
+    margin-left:10px;
+    overflow-x: auto;
+    border-collapse: collapse;
+    overflow-y: auto;
+    max-height:270px/* Ajoute une barre de défilement vertical si nécessaire */
+}
+
+
+th, td {
+    padding: 4px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: .8rem;
+}
+
+th {
+    background-color:#2C2D3F;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #ddd;
+}
+
+.supllement {
+    float:right;
+    display: grid;
+    grid-template-columns: repeat(6, 0fr); /* 6 colonnes avec largeur égale */
+    gap: 0px; /* Espacement entre les éléments de la grille */
+}
+    .supllement .btn {
+        margin: 1px;
+        padding:5px
+    }
+    .logo-content {
+        display: flex;
+        align-items: center; /* Aligner verticalement les éléments */
+    }
+
+.logo-content i {
+    margin: 15px; /* Espacement entre l'icône et le texte */
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Assurez-vous que le texte est centré horizontalement */
+}
+.content {
+    margin: 20px;
+}
+
+.box {
+    margin:1px;
+    border: 2px solid #1A76D1;
+    background-color: white;
+    border-radius: .7rem;
+    padding: 0.5rem;
+}
+.margin {
+    margin:15px;
+}
+form .text {
+     
+    margin-top: 30px;
+}
+
+form .text h1 {
+    color: #2C2D3F;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    line-height: 42px;
+}
+
+    form .text h1 span {
+        color: #1a76d1;
+    }
+ .text {
+    margin-top: 30px;
+}
+
+  .text h2 {
+        color: #2C2D3F;
+        font-size: 38px;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        line-height: 42px;
+    }
+
+     .text h2 span {
+            color: #1a76d1;
+        }
+    .text h4 {
+        color: #2C2D3F;
+        font-size: 25px;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        line-height: 42px;
+    }
+
+        .text h4 span {
+            color: #1a76d1;
+        }
+.btn-date{
+    height:35px;
+    padding:1px;
+    width:180px;
+    font-size:.82rem;
+}
+    
+
+        footer.footer {
+            position:fixed;
+            text-align: center;
+            height:59px;
+            width: 100%;
+            bottom: 0;
+        }
+        .text h4 {
+            color: #2C2D3F;
+            font-size: 25px;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            line-height: 42px;
+        }
+
+            .text h4 span {
+                color: #1a76d1;
+            }
+
+        body {
+            background-color: #f0f0f0; /* Fond gris */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+ 
+        .alert-container {
+            position: fixed;
+            top: 20%; /* Position verticale centrée */
+            left: 50%; /* Position horizontale centrée */
+            transform: translate(-50%, -50%);
+            z-index: 1000; /* Assure que l'alerte est au-dessus de tout autre contenu */
+            display: none; /* Par défaut, l'alerte est cachée */
+        }
+
+        .alert {
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ombre pour effet de profondeur */
+            max-width: 400px; /* Largeur maximale de l'alerte */
+        }
+
+            .alert strong {
+                font-weight: bold;
+            }
+
+ }
+
+        .text-info {
+            color: #17a2b8; /* Couleur du texte */
+        }
+
+        .modal {
+            display: none;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Ajustez cette valeur pour la largeur souhaitée */
+            height: 35%; /* Ajustez cette valeur pour la hauteur souhaitée */
+            max-width: 90%; /* Ajoutez un maximum de largeur pour le rendre réactif */
+            max-height: 90%; /* Ajoutez un maximum de hauteur pour le rendre réactif */
+            box-sizing: border-box; /* Assurez-vous que le padding est inclus dans les dimensions */
+            overflow-y: auto; /* Ajoutez un défilement vertical si le contenu dépasse la hauteur */
+        }
+        9 
+
+    .close {
+        color: #aaa;
+margin-right:5px;        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+            margin: 25px;
+            font-size: 20px; /* Agrandit l'icône */
+        }
+
+            .notification-icon .counter {
+                position: absolute;
+                top: -10px; /* Ajuste la position vers le haut */
+                right: -10px; /* Ajuste la position vers la droite */
+                background-color: red;
+                color: white;
+                border-radius: 50%; /* Transforme en cercle */
+                width:18px; /* Largeur et hauteur du cercle */
+                height: 18px;
+                text-align: center; /* Centre le texte */
+                line-height: 20px; /* Centre vertical du texte */
+                font-size: 10px; /* Ajuste la taille du texte du compteur */
+            }
+
+        
+
+        .notification-card {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            width: 300px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+            .notification-card .notification {
+                padding: 10px;
+                border-bottom: 1px solid #eee;
+            }
+
+                .notification-card .notification:last-child {
+                    border-bottom: none;
+                }
+
+                .notification-card .notification .date {
+                    font-size: 12px;
+                    color: #888;
+                }
+</style>
+
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="" class="logo">
+                <i class="fa fa-heartbeat" aria-hidden="true"><strong>CliniSys</strong></i>
+            </a>
+            <div class="main-menu">
+                <nav>
+                    <ul class="nav menu">
+                        <li><a asp-area="" asp-controller="Poste" asp-action="Index">Poste</a></li>
+                        <li><a asp-area="" asp-controller="Repos" asp-action="Index">Repos</a></li>
+                        <li><a asp-area="" asp-controller="Supplement" asp-action="Index">Heures supplémentaires</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="ApproveRegistrationRequests">Confirmation d'inscription</a></li>
+                        <li>
+                            <div class="notification-icon" id="notificationIcon">
+                                <i class="fa fa-bell"></i>
+                                <span class="counter" id="notificationCounter">0</span>
+                                <div class="notification-card" id="notificationCard"></div>
+                            </div>
+                        </li>
+
+                        <a asp-area="" asp-controller="Home" asp-action="Index"><div class="btn-dx btn">Déconnexion</div></a>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <form id="emploi-form" method="post" class="margin">
+        <input type="hidden" id="chefServiceId"> <!-- Value will be set dynamically -->
+        <input type="hidden" id="serviceId"> <!-- Value will be set dynamically -->
+        <div id="alertContainer" class="alert-container"></div>
+
+        <div class="center">
+            <div class="row">
+                <div class="date-navigation">
+                    <button id="previousWeekBtn" class="btn-date btn">
+                        <span class="fas fa-chevron-left"></span> Semaine Précédente
+                    </button>
+                    <input type="date" id="date" class="box mx-1" name="DateofWeek" required>
+                    <button id="nextWeekBtn" class="btn-date btn">
+                        Semaine Prochaine <span class="fas fa-chevron-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="supllement" id="supplementsSection">
+            @if (Model != null && Model.Supplements != null)
+            {
+                @foreach (var supplement in Model.Supplements)
+                {
+                    <div id="@supplement.SupplementId" draggable="true" class="supplement">
+                        <div class="btn">
+                            <strong>@supplement.Nom</strong>
+                        </div>
+                    </div>
+                }
+            }
+        </div><div id="modal" class="modal">
+
+        <div class="modal-content">
+                <div class="close">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+        <form id="modalForm">
+                    <label for="heuredébut">Heure début:</label>
+
+            <input type="time" class="box" id="heureDebut" name="heureDebut">
+            <label for="heureFin">Heure de fin:</label>
+            <input type="time" class="box" id="heureFin" name="heureFin">
+
+            <button type="button" class="btn margin" id="valider">Valider</button>
+        </form>
+        </div>
+        </div>
+        <div id="alertContainer" class="alert-container">
+            <div id="alertFrame" class="alert border-info bg-transparent text-info">
+                <strong>Info!</strong> Alert for passing information to user.
+            </div>
+        </div>
+
+       
+
+
+        <div class="buttons-container mt-4 margin">
+
+            <div class="form">
+                <label for="search">
+                    <input class="input" type="text" placeholder="Rechercher" id="search">
+                    <div class="fancy-bg"></div>
+                    <div class="search">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
+                            <g>
+                                <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <button class="close-btn" type="reset">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </label>
+            </div>
+            <button class="bookmarkBtn" id="myButton" type="submit">
+                <span class="IconContainer">
+                    <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+                        <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                    </svg>
+                </span>
+                <p class="textt">Enregistrer</p>
+            </button>
+            <button class="button" id="clearButton">
+                <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+            </button>
+
+            <button class="Btn" id="download-pdf" onclick="downloadPDF(event)">
+                <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                </svg>
+                <span class="icon2"></span>
+                <span class="tooltip">Télécharger</span>
+            </button>
+            <!-- Bouton pour afficher les emplois -->
+            <button type="button" class="btn btn-date" id="afficherEmploiButton" onclick="afficherEmploi(event)">Afficher les emplois</button>
+
+
+
+        </div>
+
+
+        <div class="schedule-table">
+            <div class="table-container">
+                <table id="tableau" data-days="@string.Join(',', Model.Days.Select(day => day.Dayname))">
+                    <thead>
+                        <tr id="days-row">
+                            @if (Model.Employees != null)
+                            {
+                                <th class="employee-column">Employée</th>
+                            }
+                            @foreach (var day in Model.Days)
+                            {
+                                @if (day != null && day.Dayname != null)
+                                {
+                                    <th>
+                                        <div>@day.Dayname</div>
+                                        <div class="day-date"></div>
+                                    </th>
+                                }
+                            }
+                            <th>Heures totales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="extra-boxes">
+
+                <select class="box" id="categorieDropdown" name="CategorieId" title="Sélectionnez une catégorie" required>
+                    @if (Model != null && Model.Categories != null)
+                    {
+                        @foreach (var categorie in Model.Categories)
+                        {
+                            <option value="@categorie.CategorieId">@categorie.CategorieName</option>
+                        }
+                    }
+                </select>
+
+                <div id="postesSection">
+                    @if (Model != null && Model.Postes != null)
+                    {
+                        @foreach (var poste in Model.Postes)
+                        {
+
+                            <div class="position" id="@poste.PosteId" draggable="true">
+                            </div>
+
+
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="repo-box" id="reposSection">
+
+            @if (Model != null && Model.Repos != null)
+            {
+                @foreach (var repos in Model.Repos)
+                {
+
+                    <div  id="@repos.ReposId" draggable="true">
+                    </div>
+                }
+            }
+        </div>
+
+
+
+
+
+        <input type="hidden" id="emploiData" name="emploiData" />
+
+
+    </form>
+
+
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="copyright-content">
+                        <p>
+                            Faites confiance à notre équipe
+                            <a href="" class="logo">
+                                <i class="fa fa-heartbeat" aria-hidden="true"> <strong>CliniSys</strong></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jquery Min JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="~/js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="~/js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="~/js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="~/js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="~/js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="~/js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="~/js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="~/js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="~/js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="~/js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="~/js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="~/js/main.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var serviceId = sessionStorage.getItem("serviceId");
+
+            function loadNotifications() {
+                fetch(`/Notification/GetNotifications?serviceId=${serviceId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var notificationCard = document.getElementById('notificationCard');
+                        notificationCard.innerHTML = "";
+                        data.forEach(notification => {
+                            var div = document.createElement("div");
+                            div.className = "notification";
+                            div.innerHTML = `
+                                        <div class="message">${notification.message}</div>
+                                        <div class="date">${new Date(notification.date).toLocaleString()}</div>
+                                    `;
+                            notificationCard.appendChild(div);
+                        });
+                    });
+
+                fetch(`/Notification/GetUnreadCount?serviceId=${serviceId}`)
+                    .then(response => response.json())
+                    .then(count => {
+                        document.getElementById("notificationCounter").textContent = count;
+                    });
+            }
+
+            document.getElementById('notificationIcon').addEventListener("click", function () {
+                var card = document.getElementById("notificationCard");
+                card.style.display = card.style.display === "none" ? "block" : "none";
+
+                if (card.style.display === "block") {
+                    fetch(`/Notification/MarkAsRead?serviceId=${serviceId}`, { method: 'POST' })
+                        .then(response => {
+                            if (response.ok) {
+                                document.getElementById("notificationCounter").textContent = 0;
+                            }
+                        });
+                }
+            });
+
+            loadNotifications();
+            setInterval(loadNotifications, 30000); // Recharger les notifications toutes les 30 secondes
+        });
+        let currentCell = null; // Variable to hold the context of the clicked cell
+
+        $('#valider').click(function (e) {
+            e.preventDefault();
+            showModal();
+        });
+
+
+        let heureDebutModal = ''; // Variable pour stocker l'heure de début du modal
+        let heureFinModal = ''; // Variable pour stocker l'heure de fin du modal
+
+        function attachSupplementClickEvents() {
+            $('.supplement').click(function (e) {
+                e.preventDefault();
+                currentCell = $(this).closest('td'); // Capture the context of the clicked cell
+
+                // Afficher le modal
+                showModal();
+            });
+        }
+      
+
+        // Reste du code inchangé
+
+        // Fonction pour afficher l'alerte
+        function afficherAlerte() {
+            $('#alertContainer').css('display', 'block');
+        }
+
+        // Appel de la fonction pour afficher l'alerte
+        afficherAlerte();
+
+        function showModal() {
+            var modal = $('#modal');
+            if (modal) {
+                modal.css('display', 'block');
+            } else {
+                console.error("Modal element not found");
+            }
+        }
+
+        function closeModal() {
+            var modal = $('#modal');
+            if (modal) {
+                modal.css('display', 'none');
+            }
+        }
+
+        $(window).click(function (event) {
+            var modal = $('#modal');
+            if (event.target == modal[0]) {
+                closeModal();
+            }
+        });
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            function fetchAndDisplayEmployees() {
+                var employeeId = sessionStorage.getItem("employeeId");
+                var serviceId = sessionStorage.getItem("serviceId");
+                const previousWeekBtn = document.getElementById('previousWeekBtn');
+                const nextWeekBtn = document.getElementById('nextWeekBtn');
+                const dateInput = document.getElementById('date');
+
+                function getNextSaturday(date) {
+                    const day = date.getDay();
+                    const offsetDays = (6 - day + 7) % 7;
+                    return new Date(date.getTime() + offsetDays * 24 * 60 * 60 * 1000);
+                }
+
+                previousWeekBtn.addEventListener('click', function () {
+                    changeDate(-7);
+                });
+
+                nextWeekBtn.addEventListener('click', function () {
+                    changeDate(7);
+                });
+
+                function changeDate(offset) {
+                    const currentDate = new Date(dateInput.value);
+                    if (isNaN(currentDate.getTime())) {
+                        alert('Veuillez sélectionner une date valide.');
+                        return;
+                    }
+                    const newDate = new Date(currentDate.getTime() + (offset * 24 * 60 * 60 * 1000));
+                    dateInput.value = newDate.toISOString().split('T')[0];
+                    updateHeaderDates(newDate.toISOString().split('T')[0]);
+                }
+
+                const today = new Date();
+                dateInput.value = getNextSaturday(today).toISOString().split('T')[0];
+
+                console.log("Chef de Service ID:", employeeId);
+                console.log("Service ID:", serviceId);
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetEmployees", "Emploi")",
+                    success: function (response) {
+                        var filteredEmployees = response.employees.filter(employee => employee.serviceId == serviceId);
+                        var tbody = document.querySelector("#tableau tbody");
+                        tbody.innerHTML = "";
+
+                        var thead = document.querySelector("#tableau thead tr");
+                        while (thead.childNodes.length > 2) {
+                            thead.removeChild(thead.childNodes[1]);
+                        }
+                        response.days.forEach(day => {
+                            var dayHeader = document.createElement("th");
+
+                            // Créer un élément pour le nom du jour
+                            var dayName = document.createElement("div");
+                            dayName.textContent = day.dayname;
+
+                            // Vérifier si day.dayDate est défini avant de créer l'élément pour la date
+                            if (day.dayDate) {
+                                // Créer un élément pour la date du jour
+                                var dayDateElement = document.createElement('span');
+                                dayDateElement.className = 'day-date';
+                                dayDateElement.textContent = day.dayDate; // Assurez-vous que day.dayDate contient la valeur de la date
+                                dayHeader.appendChild(dayDateElement);
+                            }
+
+                            // Ajouter le nom du jour et la date (si disponible) au th
+                            dayHeader.appendChild(dayName);
+
+                            // Ajouter un saut de ligne entre le nom du jour et la date
+                            dayHeader.appendChild(document.createElement('br'));
+
+                            thead.insertBefore(dayHeader, thead.lastElementChild);
+                        });
+
+                        console.log(response.days);
+
+
+                        // Ajouter un événement pour récupérer la date du jour
+
+                        var employeeNameHeader = document.createElement("th");
+                        employeeNameHeader.textContent = "Employée";
+                        thead.insertBefore(employeeNameHeader, thead.childNodes[1]);
+
+                        var totalHoursHeader = document.createElement("th");
+                        totalHoursHeader.className = "TotalHours-column";
+                        totalHoursHeader.textContent = "Heures totales";
+                        totalHoursHeader.setAttribute("title", "Heures totales");
+                        thead.appendChild(totalHoursHeader);
+
+                        filteredEmployees.forEach(employee => {
+                            var row = document.createElement("tr");
+                            row.id = employee.employeeId;
+
+                            var employeeCell = document.createElement("td");
+                            employeeCell.textContent = employee.name;
+                            row.appendChild(employeeCell);
+
+                            response.days.forEach(day => {
+                                var cellId = `${employee.employeeId}-${day.dayname}`;
+                                var dayCell = document.createElement("td");
+                                dayCell.id = cellId;
+                                dayCell.className = "droppable " + day.dayname.toLowerCase();
+                                dayCell.dataset.employee = employee.employeeId;
+                                dayCell.dataset.day = day.dayname;
+                                row.appendChild(dayCell);
+                            });
+
+                            var totalHoursCell = document.createElement("td");
+                            totalHoursCell.className = "TotalHours-column";
+                            totalHoursCell.textContent = employee.totalWeeklyHours || 0;
+                            totalHoursCell.setAttribute("title", "Heures totales");
+                            row.appendChild(totalHoursCell);
+
+
+                            tbody.appendChild(row);
+                        });
+
+                        attachDragDropEvents();
+                        updateHeaderDates(dateInput.value);
+                        attachSupplementClickEvents(); // Call the function here as well
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error("Error:", textStatus, errorThrown);
+                        alert("Une erreur s'est produite lors du traitement de votre demande.");
+                    }
+                });
+            }
+
+            function updateHeaderDates(selectedDate) {
+                const startDate = new Date(selectedDate);
+                const days = document.querySelectorAll('#days-row th');
+                days.forEach((day, index) => {
+                    if (index > 0 && index < days.length - 1) {
+                        const dayDate = new Date(startDate.getTime() + (index - 1) * 24 * 60 * 60 * 1000);
+                        let dayDateElement = day.querySelector('.day-date');
+                        if (!dayDateElement) {
+                            dayDateElement = document.createElement('span');
+                            dayDateElement.className = 'day-date';
+                            day.appendChild(dayDateElement); // Ajoutez l'élément créé à l'en-tête
+                        }
+                        dayDateElement.textContent = dayDate.toISOString().split('T')[0];
+                    }
+                });
+            }
+
+
+            flatpickr("#date", {
+                dateFormat: "Y-m-d",
+                disable: [
+                    function (date) {
+                        return date.getDay() !== 6;
+                    }
+                ],
+                onChange: function (selectedDates, dateStr, instance) {
+                    updateHeaderDates(dateStr);
+                }
+            });
+
+            let draggedItem = null;
+
+            function allowDrop(event) {
+                event.preventDefault();
+            }
+
+            function dragStart(event) {
+                draggedItem = this;
+                this.classList.add('dragging');
+                event.dataTransfer.effectAllowed = 'move';
+            }
+
+            function dragEnd() {
+                this.classList.remove('dragging');
+                draggedItem = null;
+            }
+            function drop(event) {
+                event.preventDefault();
+                if (draggedItem) {
+                    // Clone the dragged item
+                    let clone = draggedItem.cloneNode(true);
+                    clone.classList.remove('dragging');
+                    // Make sure the id is preserved in the clone
+                    clone.id = draggedItem.id;
+
+                    // Ajouter les valeurs des champs d'heure de début et de fin à la cellule
+                    const heureDebut = $('#heureDebut').val();
+                    const heureFin = $('#heureFin').val();
+                    clone.dataset.heureDebut = heureDebut;
+                    clone.dataset.heureFin = heureFin;
+
+                    // Append the clone to the target
+                    event.currentTarget.appendChild(clone);
+                }
+            }
+
+
+
+            function dragOver(event) {
+                event.preventDefault();
+            }
+
+            function dragEnter(event) {
+                event.preventDefault();
+                this.classList.add('hovered');
+            }
+
+            function dragLeave() {
+                this.classList.remove('hovered');
+            }
+
+            function clearCell() {
+                if (this.innerHTML.trim() !== '') {
+                    this.innerHTML = '';
+                }
+            }
+
+            function attachDragDropEvents() {
+                const positions = document.querySelectorAll('.position');
+                const repos = document.querySelectorAll('#reposSection .repos');
+                const cells = document.querySelectorAll('.droppable');
+                const supplements = document.querySelectorAll('.supplement');
+
+                positions.forEach(position => {
+                    position.addEventListener('dragstart', dragStart);
+                    position.addEventListener('dragend', dragEnd);
+                });
+
+                repos.forEach(repo => {
+                    repo.addEventListener('dragstart', dragStart);
+                    repo.addEventListener('dragend', dragEnd);
+                });
+
+                cells.forEach(cell => {
+                    cell.addEventListener('dragover', allowDrop);
+                    cell.addEventListener('dragenter', dragEnter);
+                    cell.addEventListener('dragleave', dragLeave);
+                    cell.addEventListener('drop', drop);
+                    cell.addEventListener('click', clearCell);
+                });
+
+                supplements.forEach(supplement => {
+                    supplement.addEventListener('dragstart', dragStart);
+                    supplement.addEventListener('dragend', dragEnd);
+                });
+            }
+
+            document.getElementById('clearButton').addEventListener('click', clearTable);
+
+            function clearTable() {
+                const cells = document.querySelectorAll('.droppable');
+                cells.forEach(cell => {
+                    cell.innerHTML = '';
+                });
+            }
+
+            function updateDraggableElements() {
+                var categorieId = document.getElementById('categorieDropdown').value;
+                if (categorieId) {
+                    fetch('/Emploi/GetPostesReposAndSupplementsByCategorie?CategorieId=' + categorieId)
+                        .then(response => response.json())
+                        .then(data => {
+                            var postesSection = document.getElementById("postesSection");
+                            postesSection.innerHTML = '';
+
+                            var reposSection = document.getElementById("reposSection");
+                            reposSection.innerHTML = '';
+
+                            var supplementsSection = document.getElementById("supplementsSection");
+                            supplementsSection.innerHTML = '';
+
+                            if (data.success) {
+                                if (data.postes && data.postes.length > 0) {
+                                    data.postes.forEach(poste => {
+                                        var posteDiv = document.createElement('div');
+                                        posteDiv.className = "position";
+                                        posteDiv.draggable = "true";
+                                        posteDiv.id = poste.posteId;
+
+                                        var posteContent = `<div class="box holiday-box">
+                                <strong>${poste.postename}</strong><br />`;
+
+                                        if (poste.matin) {
+                                            posteContent += ' Matin  ';
+                                        }
+
+                                        if (poste.apresMidi) {
+                                            posteContent += ' Après-midi  ';
+                                        }
+
+                                        if (poste.gardeSoir) {
+                                            posteContent += ' Garde Soir';
+                                        }
+
+                                        posteContent += `<br />
+                                S1 :<strong> <span class=>${formatTime(poste.seance1Debut)} || ${formatTime(poste.seance1Fin)}</span></strong><br />`;
+
+                                        if (poste.seance2Debut) {
+                                            posteContent += `<span>${formatTime(poste.seance2Debut)} ||</span>`;
+                                        }
+
+                                        if (poste.seance2Fin) {
+                                            posteContent += `  S2 :<span>${formatTime(poste.seance2Fin)}</span>`;
+                                        }
+
+                                        posteContent += `</div>`;
+
+                                        posteDiv.innerHTML = posteContent;
+                                        postesSection.appendChild(posteDiv);
+                                    });
+                                }
+
+                                if (data.repos && data.repos.length > 0) {
+                                    data.repos.forEach(repo => {
+                                        var repoDiv = document.createElement('div');
+                                        repoDiv.className = "repos";
+                                        repoDiv.draggable = "true";
+                                        repoDiv.id = repo.reposId;
+
+                                        // Extract year, month, and day from repo.date_Jours
+                                        var dateJoursContent = repo.date_Jours ? `<span>${repo.date_Jours.slice(0, 10)}</span>` : '';
+
+                                        repoDiv.innerHTML = `
+                    <div class="box repo-box">
+                        <strong>${repo.reposName}</strong><br />
+                        ${dateJoursContent}
+                    </div>`;
+
+                                        reposSection.appendChild(repoDiv);
+                                    });
+                                }
+
+
+                                if (data.supplements && data.supplements.length > 0) {
+                                    data.supplements.forEach(supplement => {
+                                        var supplementDiv = document.createElement('div');
+                                        supplementDiv.className = "supplement";
+                                        supplementDiv.draggable = "true";
+                                        supplementDiv.id = supplement.supplementId;
+
+                                        supplementDiv.innerHTML = `<div class="btn">
+                                                    <strong>${supplement.nom}</strong>
+                                                </div>`;
+
+                                        supplementsSection.appendChild(supplementDiv);
+                                    });
+
+                                    attachDragDropEvents();
+                                }
+                            } else {
+                                console.error('Erreur lors de la récupération des données: ', data.message);
+                            }
+                            attachSupplementClickEvents(); // Call the function here
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de la récupération des postes, repos et suppléments:', error);
+                        });
+                } else {
+                    var postesSection = document.getElementById("postesSection");
+                    postesSection.innerHTML = '';
+
+                    var reposSection = document.getElementById("reposSection");
+                    reposSection.innerHTML = '';
+
+                    var supplementsSection = document.getElementById("supplementsSection");
+                    supplementsSection.innerHTML = '';
+                }
+            }
+
+
+            function formatTime(timeString) {
+                if (!timeString) return '';
+
+                // Convertir la chaîne de temps en un objet Date pour pouvoir utiliser les méthodes de formatage de Date
+                var time = new Date(`2000-01-01T${timeString}`);
+
+                // Formater le temps en hh:mm
+                return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+            }
+
+            const form = document.getElementById('emploi-form');
+            const saveButton = document.getElementById('myButton');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+
+            saveButton.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                var emploiData = getTableData();
+                var serviceId = sessionStorage.getItem("serviceId");
+
+                var dataToSend = {
+                    ServiceSelected: serviceId,
+                    DateSelected: document.getElementById("date").value,
+                    CategorieSelected: document.getElementById("categorieDropdown").value,
+                    EmploiData: emploiData
+                };
+
+                console.log("Données d'emploi à envoyer au serveur :", dataToSend);
+
+                $.ajax({
+                    url: '@Url.Action("EnregistrerEmploi", "Emploi")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(dataToSend),
+                    success: function (result) {
+                        console.log("Résultat :", result);
+                        alert(result.message);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erreur lors de l'envoi des données :", error);
+                        alert("Erreur lors de l'envoi des données. Consultez la console pour plus de détails.");
+                    }
+                });
+            });
+
+            function getTableData() {
+                var emploiData = [];
+                $("#tableau tbody tr").each(function () {
+                    var employeeId = $(this).attr("id");
+                    var name = $(this).find("td:first").text().trim();
+
+                    $(this).find("td.droppable").each(function (index, cell) {
+                        var dayName = $(this).data("day");
+                        var dayDate = $(`#tableau thead th:contains(${dayName}) .day-date`).text().trim();
+
+                        var posteId = $(cell).find(".position").attr("id") || "";
+                        var reposId = $(cell).find(".repos").attr("id") || "";
+                        var supplementId = $(cell).find(".supplement").attr("id") || "";
+
+                        var heureDebut = $(cell).find('.supplement').data('heureDebut') || "";
+                        var heureFin = $(cell).find('.supplement').data('heureFin') || "";
+
+                        console.log(`Cell for ${dayName}: HeureDebut=${heureDebut}, HeureFin=${heureFin}`);
+
+                        var dailyEmployment = {
+                            EmployeeId: employeeId,
+                            EmployeName: name,
+                            DayName: dayName,
+                            DateDuJour: dayDate,
+                            PosteId: posteId,
+                            ReposId: reposId,
+                            SupplementId: supplementId,
+                            StartHour: heureDebut,
+                            EndHour: heureFin,
+                        };
+
+                        emploiData.push(dailyEmployment);
+                    });
+                });
+                return emploiData;
+            }
+
+            $('#valider').click(function () {
+                const heureDebut = $('#heureDebut').val();
+                const heureFin = $('#heureFin').val();
+
+                console.log("Heure de début récupérée:", heureDebut);
+                console.log("Heure de fin récupérée:", heureFin);
+
+                if (currentCell) {
+                    currentCell.data('heureDebut', heureDebut);
+                    currentCell.data('heureFin', heureFin);
+
+                    currentCell.html(`
+                <div class="supplement" draggable="true" id="${currentCell.find('.supplement').attr('id')}" data-heure-debut="${heureDebut}" data-heure-fin="${heureFin}">
+                </div>
+            `);
+                }
+
+                closeModal();
+                attachSupplementClickEvents(); // Réattache les événements de clic sur les suppléments
+            });
+
+
+
+
+            fetchAndDisplayEmployees();
+            document.getElementById('categorieDropdown').addEventListener('change', updateDraggableElements);
+            updateDraggableElements();
+        });
+
+
+
+        //==========================>  PDF <===========================================//
+        function downloadPDF(event) {
+            event.stopPropagation();
+            const doc = new jsPDF();
+            const table = document.getElementById("tableau");
+            doc.autoTable({ html: table });
+            doc.save("tableau.pdf");
+        }
+       
+
+        //==========================> AFFICHAGE DU L'EMPLOI <===========================================//
+        function afficherEmploi() {
+            var categorieId = $("#categorieDropdown").val();
+            var dateSelected = $("#date").val();
+            var serviceId = sessionStorage.getItem("serviceId");
+
+            console.log("Service ID :", serviceId);
+            console.log("Catégorie ID :", categorieId);
+            console.log("Date sélectionnée :", dateSelected);
+
+            $.ajax({
+                url: '/Emploi/GetEmploiByServiceCategorieAndDate',
+                type: 'GET',
+                data: { serviceId: serviceId, categorieId: categorieId, dateSelected: dateSelected },
+                success: function (response) {
+                    if (response.success) {
+                        $.each(response.data, function (index, emploi) {
+                            var employeeId = emploi.employeeId;
+                            var dayName = emploi.dayName;
+                            var cellId = `${employeeId}-${dayName}`;
+                            var cellContent = '';
+                            var cell = $("#tableau").find("tr#" + employeeId + " td[data-day='" + dayName + "']");
+
+                            if (emploi.posteId) {
+                                cellContent += emploi.posteName + '<br>';
+                            }
+
+                            if (emploi.reposId) {
+                                cellContent += emploi.reposName + '<br>';
+                            }
+
+                            if (emploi.supplementId) {
+                                cellContent += emploi.supplementName + '<br>';
+                            }
+
+                            if (emploi.startHour && emploi.endHour) {
+                                cellContent += `Start: ${emploi.startHour} - End: ${emploi.endHour}<br>`;
+                            }
+
+                            cell.html(cellContent);
+                        });
+                    } else {
+                        var alertMessage = "Aucun emploi trouvé pour les critères sélectionnés.";
+                        var alertDiv = $('<div class="alert border-info bg-transparent text-info">').text(alertMessage);
+                        $("#alertContainer").empty().append(alertDiv);
+                        setTimeout(function () {
+                            alertDiv.remove();
+                        }, 1000);// Supprimer le message après 3 secondes
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Une erreur s'est produite lors de la récupération des données d'emploi :", error);
+                }
+            });
+        }
+
+     
+
+
+   
+
+    </script>
+</body>
+</html>
+
+

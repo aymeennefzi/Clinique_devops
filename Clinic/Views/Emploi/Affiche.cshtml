@@ -1,0 +1,552 @@
+﻿@model Clinic.Models.EmploiViewModel
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="~/css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="~/css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <!-- Medipro CSS -->
+
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .text h4 {
+            color: #2C2D3F;
+            font-size: 25px;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            line-height: 42px;
+        }
+
+            .text h4 span {
+                color: #1a76d1;
+            }
+
+        .header .logo {
+            font-size: 1.8rem;
+            color: var(--black);
+            
+        }
+
+            .header .logo i {
+                margin-top: 30px;
+                margin-left: 30px;
+                color: #1A76D1;
+            }
+        body {
+            background-color: #f0f0f0; /* Fond gris */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container-margin {
+            flex: 1;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32%;
+            min-height: 400px; /* Fixe la hauteur des cartes */
+            position: relative; /* Pour positionner le bouton de manière absolue */
+        }
+
+            .card h4 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+        .margin {
+            margin-bottom: 15px;
+        }
+
+
+
+        tabale {
+            width: 2500px;
+        }
+
+        .btn-dx {
+            margin-top: 15px;
+        }
+
+        footer.footer {
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+
+            <div class="row">
+                <!-- Start Logo -->
+                <div class="col">
+                    <!-- Start Logo -->
+                    <a href="" class="logo">
+                        <i class="fa fa-heartbeat" aria-hidden="true"><strong>CliniSys</strong></i>
+                    </a>
+
+                </div>
+
+                <div class="margin">
+                    <!-- Main Menu -->
+                    <div class="main-menu">
+                        <nav>
+                            <ul class="nav menu">
+                                <div class="margin">
+                                <li>
+                                    
+                                </li>
+
+                                    <a asp-area="" asp-controller="Home" asp-action="Index"> <div class="btn mr-2">Déconnexion</div></a>
+
+
+
+
+
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+
+            </div>
+    </header>
+
+  
+    <form>
+
+        <div class="center margin">
+            <div class="row">
+                <div class="date-navigation">
+                    <button id="previousWeekBtn" class="btn mx-1">
+                        <span class="fas fa-chevron-left"></span> Semaine Précédente
+                    </button>
+                    <input type="date" id="date" class="box mx-1" name="DateofWeek" required>
+                    <button id="nextWeekBtn" class="btn mx-1">
+                        Semaine Prochaine <span class="fas fa-chevron-right"></span>
+                        </button>
+                </div>
+            </div>
+            </div>
+      
+
+
+       
+        <div class="row">
+                    <table id="tableau" data-days="@string.Join(',', Model.Days.Select(day => day.Dayname))">
+                        <thead>
+                            <tr id="days-row">
+                                @if (Model.Employees != null)
+                                {
+                                    <th class="employee-column">Employée</th>
+                                }
+                                @foreach (var day in Model.Days)
+                                {
+                                    @if (day != null && day.Dayname != null)
+                                    {
+                                        <th>
+                                            <div>@day.Dayname</div>
+                                            <div class="day-date"></div>
+                                        </th>
+                                    }
+                                }
+                                <th>Heures totales</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+           
+                    </tbody>
+            </table> 
+                <button class="Btn" id="download-pdf" onclick="downloadPDF(event)">
+                    <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                    </svg>
+                    <span class="icon2"></span>
+                    <span class="tooltip">Télécharger</span>
+                </button>
+
+
+
+
+
+           
+        </div>
+</form>
+    <section class="Feautes section">
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-ambulance-cross"></i>
+                        </div>                        <h3></h3>
+
+                        <p>Aide d'urgence</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-medical-sign-alt"></i>
+                        </div>                        <h3></h3>
+
+                        <p>Pharmacie enrichie</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+                <div class="col-lg-4 col-12">
+                    <!-- Start Single features -->
+                    <div class="single-features last">
+                        <div class="signle-icon">
+                            <i class="icofont icofont-stethoscope"></i>
+                        </div>
+                        <h3></h3>
+                        <p>Traitement médical</p>
+                    </div>
+                    <!-- End Single features -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Area -->
+    <footer id="footer" class="footer ">
+
+        <!--/ End Footer Top -->
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="copyright-content">
+                        <p>
+                            Faites confiance à notre équipe
+                            <a href="" class="logo">
+                                <i class="fa fa-heartbeat" aria-hidden="true"> <strong>CliniSys</strong></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Copyright -->
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- jquery Min JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="~/js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="~/js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="~/js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="~/js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="~/js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="~/js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="~/js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="~/js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="~/js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="~/js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="~/js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="~/js/main.js"></script>
+    <script>
+  
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateInput = document.getElementById('date');
+            const previousWeekBtn = document.getElementById('previousWeekBtn');
+            const nextWeekBtn = document.getElementById('nextWeekBtn');
+
+            // Get the stored date or use the next Saturday as default
+            const storedDate = sessionStorage.getItem('selectedDate');
+            const today = new Date();
+            const defaultDate = storedDate ? new Date(storedDate) : getNextSaturday(today);
+            dateInput.value = defaultDate.toISOString().split('T')[0];
+            updateHeaderDates(dateInput.value);
+
+            // Store the selected date in session storage
+            dateInput.addEventListener('change', function () {
+                sessionStorage.setItem('selectedDate', dateInput.value);
+                updateHeaderDates(dateInput.value);
+                afficherEmploi();
+            });
+
+            previousWeekBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                changeDate(-7);
+            });
+
+            nextWeekBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                changeDate(7);
+            });
+
+            function changeDate(offset) {
+                const currentDate = new Date(dateInput.value);
+                if (isNaN(currentDate.getTime())) {
+                    alert('Veuillez sélectionner une date valide.');
+                    return;
+                }
+                const newDate = new Date(currentDate.getTime() + (offset * 24 * 60 * 60 * 1000));
+                dateInput.value = newDate.toISOString().split('T')[0];
+                sessionStorage.setItem('selectedDate', dateInput.value);
+                updateHeaderDates(dateInput.value);
+                afficherEmploi();
+            }
+
+            function getNextSaturday(date) {
+                const day = date.getDay();
+                const offsetDays = (6 - day + 7) % 7;
+                return new Date(date.getTime() + offsetDays * 24 * 60 * 60 * 1000);
+            }
+
+            function updateHeaderDates(selectedDate) {
+                const startDate = new Date(selectedDate);
+                const days = document.querySelectorAll('#days-row th');
+                days.forEach((day, index) => {
+                    if (index > 0 && index < days.length - 1) {
+                        const dayDate = new Date(startDate.getTime() + (index - 1) * 24 * 60 * 60 * 1000);
+                        let dayDateElement = day.querySelector('.day-date');
+                        if (!dayDateElement) {
+                            dayDateElement = document.createElement('span');
+                            dayDateElement.className = 'day-date';
+                            day.appendChild(dayDateElement);
+                        }
+                        dayDateElement.textContent = dayDate.toISOString().split('T')[0];
+                    }
+                });
+            }
+
+            flatpickr("#date", {
+                dateFormat: "Y-m-d",
+                disable: [
+                    function (date) {
+                        return date.getDay() !== 6;
+                    }
+                ],
+                onChange: function (selectedDates, dateStr) {
+                    sessionStorage.setItem('selectedDate', dateStr);
+                    updateHeaderDates(dateStr);
+                    afficherEmploi();
+                }
+            });
+           
+            afficherEmploi();
+
+
+            // AJAX request to get employee and days
+           
+        });
+            // Fonction pour obtenir la prochaine date de samedi à partir de la date actuelle
+
+ var serviceId = sessionStorage.getItem("serviceId");
+            var employeeId = sessionStorage.getItem("employeeId"); $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetEmployees", "Emploi")",
+                success: function (response) {
+                    var employee = response.employees.find(emp => emp.employeeId == employeeId);
+
+                    if (!employee) {
+                        alert("Aucun employé trouvé pour cet ID.");
+                        return;
+                    }
+
+                    var tbody = document.querySelector("#tableau tbody");
+                    tbody.innerHTML = "";
+
+                    var row = document.createElement("tr");
+                    row.id = employee.employeeId;
+
+                    var employeeCell = document.createElement("td");
+                    employeeCell.textContent = employee.name;
+                    row.appendChild(employeeCell);
+
+                    response.days.forEach(day => {
+                        var cellId = `${employee.employeeId}-${day.dayname}`;
+                        var dayCell = document.createElement("td");
+                        dayCell.id = cellId;
+                        dayCell.className = day.dayname.toLowerCase();
+                        dayCell.dataset.employee = employee.employeeId;
+                        dayCell.dataset.day = day.dayname;
+                        row.appendChild(dayCell);
+                    });
+
+
+                    var totalHoursCell = document.createElement("td");
+                    totalHoursCell.className = "TotalHours-column";
+                    totalHoursCell.textContent = employee.totalWeeklyHours || 0;
+                    totalHoursCell.setAttribute("title", "Total Weekly Hours");
+                    row.appendChild(totalHoursCell);
+
+                    tbody.appendChild(row);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error("Error:", textStatus, errorThrown);
+                    alert("An error occurred while processing your request.");
+                }
+            });
+            function downloadPDF(event) {
+                event.stopPropagation();
+                const doc = new jsPDF();
+                const table = document.getElementById("tableau");
+                doc.autoTable({ html: table });
+                doc.save("tableau.pdf");
+            }
+
+            // Événement pour le bouton de téléchargement PDF
+            const downloadBtn = document.getElementById('download-pdf');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', downloadPDF);
+            }
+            // Fonction pour afficher les emplois
+            function afficherEmploi() {
+                var dateSelected = $("#date").val();
+                var serviceId = sessionStorage.getItem("serviceId");
+                var employeeId = sessionStorage.getItem("employeeId");
+
+                console.log("Service ID :", serviceId);
+                console.log("Date sélectionnée :", dateSelected);
+                console.log("Employee ID :", employeeId);
+
+                $.ajax({
+                    url: '/Emploi/GetEmploiByEmployee',
+                    type: 'GET',
+                data: { serviceId: serviceId, dateSelected: dateSelected, employeeId: employeeId },
+                success: function (response) {
+                        console.log("Response from GetEmploiByEmployee:", response);
+
+                        if (response.success) {
+                            var emploiData = response.data;
+
+                            if (emploiData.length === 0) {
+                                alert("Aucun emploi trouvé pour les critères sélectionnés.");
+                                return;
+                            }
+
+                            // Parcourir chaque emploi
+                        // Parcourir chaque emploi
+                        $.each(emploiData, function (index, emploi) {
+                            var dayName = emploi.dayName;
+                            var cellId = `${employeeId}-${dayName}`;
+                            var cellContent = '';
+                            var cell = $("#tableau").find("tr#" + employeeId + " td[data-day='" + dayName + "']");
+
+                            // Construire le contenu de la cellule en fonction des données de l'emploi
+                            if (emploi.posteId) {
+                                cellContent += emploi.posteName + '<br>';
+                            }
+                            if (emploi.reposId) {
+                                cellContent += emploi.reposName + '<br>';
+                            }
+                            if (emploi.supplementId) {
+                                cellContent += emploi.supplementName + '<br>';
+                            }
+                            if (emploi.startHour && emploi.endHour) {
+                                cellContent += `Start: ${emploi.startHour} - End: ${emploi.endHour}<br>`;
+                            }
+
+                            cell.html(cellContent);
+                        });
+
+                        } else {
+                            alert("Aucun emploi trouvé pour les critères sélectionnés.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Une erreur s'est produite lors de la récupération des données d'emploi :", error);
+                    }
+                });
+            }
+    
+        
+      
+
+    </script>
+</body>
+</html>
+
+
+
