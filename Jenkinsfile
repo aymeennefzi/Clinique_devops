@@ -44,7 +44,7 @@ pipeline {
                     sh "mkdir -p ${testResultsDir}" 
                     sh "dotnet test Clinic.sln --logger trx --results-directory ${testResultsDir}" 
                 }
-                step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
+                // step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
             }
         }
         stage('SonarQube Analysis') {
