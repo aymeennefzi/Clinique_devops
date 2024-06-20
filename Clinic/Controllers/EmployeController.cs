@@ -65,7 +65,7 @@ namespace Clinic.Controllers
         }
 
         // Méthode pour peupler la liste des services
-        private void PopulateServiceList()
+        public void PopulateServiceList()
         {
             var services = _context.Services?.ToList();
             ViewBag.ServiceList = new SelectList(services, "Id", "Name");
