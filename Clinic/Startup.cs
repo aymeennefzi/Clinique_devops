@@ -19,11 +19,8 @@ public class Startup
 
         
     {
-        //services.Configure<KestrelServerOptions>(options =>
-        //{
-        //    options.AllowSynchronousIO = true;
-        //});
-        //services.AddMetrics();
+        
+        services.AddMetrics();
 
 
         var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
