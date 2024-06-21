@@ -40,5 +40,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 COPY --from=build /src/Clinic ./Clinic
-COPY --from=build /src/Clinic.csproj ./Clinic.csproj
 ENTRYPOINT ["dotnet", "Clinic.dll"]
