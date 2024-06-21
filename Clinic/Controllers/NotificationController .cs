@@ -20,7 +20,7 @@ namespace Clinic.Controllers
         {
             var notifications = await _context.Notification
                 .Where(n => n.ServiceId == serviceId && !(bool)n.IsRead)
-                .ToListAsync(); // Assurez-vous que ToListAsync est importé
+                .ToListAsync(); /// Assurez-vous que ToListAsync est importé
 
             return Json(notifications);
         }

@@ -14,7 +14,7 @@ namespace Clinic
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseMetricsWebTracking()
+                
                 .UseMetrics(options =>
                 {
                     options.EndpointOptions = endpointOptions =>
