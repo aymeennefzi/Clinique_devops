@@ -1,28 +1,37 @@
 version: '3.4'
 
-services:
-  clinic:
-    image: clinic 
-    build:
-      context: .
-      dockerfile: Clinic/Dockerfile 
-    ports:
-      - "8089:8089"
-    depends_on:
-      - db
-    
+networks:
+  cliniqueSysApp:
 
-  db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: clinique_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+services:
+  clinicdb:
+    container_name: Database
+    image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-      - "3307:3306"  
+        - 8002:1433
+    environment: 
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=password-123@
+    networks:
+        - cliniqueSysApp
     volumes:
       - db_data:/var/lib/mysql
 
+  clinic:
+    container_name: clinique-app
+    image: ${DOCKER_REGISTRY-}clinic
+    build:
+      context: .
+      dockerfile: Clinic/Dockerfile
+    ports:
+        - 8081:80 
+    depends_on:
+        - clinicdb
+    environment:
+        - DB_HOST=clinicdb
+        - DB_NAME=cliniqueApp
+        - DB_PASSWORD= password-123@
+    networks:
+        - cliniqueSysApp
 volumes:
   db_data: 

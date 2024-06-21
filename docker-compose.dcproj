@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>89487d74-f708-46a9-b0e9-f2c6ff2a681d</ProjectGuid>
+    <ProjectGuid>0a972eb5-d594-433b-b54b-9f2b1dc6b1fe</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>clinic</DockerServiceName>

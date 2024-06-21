@@ -15,10 +15,15 @@ public class Startup
     public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
+
+        
     {
+        var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+        var dbName = Environment.GetEnvironmentVariable("DB_NAME"); ;
+        var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD"); ;
+        var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword}";
         // Add the database context
-        services.AddDbContext<ClinicDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ClinicDbContext>(options =>options.UseSqlServer(connectionString));
 
         // Other service registrations
         services.AddControllersWithViews();
