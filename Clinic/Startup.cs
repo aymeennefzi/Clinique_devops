@@ -20,7 +20,7 @@ public class Startup
         
     {
         
-        services.AddMetrics();
+        //services.AddMetrics();
 
 
         var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
