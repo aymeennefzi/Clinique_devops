@@ -62,27 +62,33 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /src
+WORKDIR /app
 
-# Copier les fichiers .csproj et restaurer les dépendances
-COPY Clinic/*.csproj ./Clinic/
-RUN dotnet restore ./Clinic/Clinic.csproj
+# Copier le fichier .csproj directement dans /app
+COPY Clinic/Clinic.csproj ./Clinic.csproj
+
+# Restaurer les dépendances
+RUN dotnet restore ./Clinic.csproj
 
 # Copier tous les autres fichiers du projet dans le répertoire de travail
-COPY Clinic/. ./Clinic/
+COPY Clinic/. .
 
 # Définir le répertoire de travail pour la construction
-WORKDIR /src/Clinic
+WORKDIR /app
 
 # Construire l'application
-RUN dotnet build Clinic.csproj -c Release -o /app/build
+RUN dotnet build -c Release -o /app/build
 
 # Publier l'application
-RUN dotnet publish Clinic.csproj -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
 # Utiliser une image .NET Runtime pour exécuter l'application
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+
+# Définir le répertoire de travail dans l'image finale
 WORKDIR /app
+
+# Copier les fichiers publiés depuis l'étape de construction
 COPY --from=build /app/publish .
 
 # Exposer le port sur lequel l'application écoutera
@@ -90,6 +96,7 @@ EXPOSE 80
 
 # Définir le point d'entrée de l'application
 ENTRYPOINT ["dotnet", "Clinic.dll"]
+
 
 
 
