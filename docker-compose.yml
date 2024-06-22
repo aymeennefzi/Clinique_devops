@@ -5,7 +5,7 @@ networks:
 
 services:
   clinicdb:
-    container_name: Database
+    container_name: Database1
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
         - 8002:1433
