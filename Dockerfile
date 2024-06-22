@@ -17,15 +17,15 @@ COPY . .
 WORKDIR /src/Clinic
 RUN dotnet build "Clinic.csproj" -c Release -o /app/build
 
-# Stage 3: Publish Image
-FROM build AS publish
-RUN dotnet publish "Clinic.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# # Stage 3: Publish Image
+# FROM build AS publish
+# RUN dotnet publish "Clinic.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-## Stage 4: Final Image
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Clinic.dll"]
+# ## Stage 4: Final Image
+# FROM base AS final
+# WORKDIR /app
+# COPY --from=publish /app/publish .
+# ENTRYPOINT ["dotnet", "Clinic.dll"]
 
-COPY ["Clinic.sln", "./"]
-COPY ["Clinic/Clinic.csproj", "Clinic/"]
+# COPY ["Clinic.sln", "./"]
+# COPY ["Clinic/Clinic.csproj", "Clinic/"]
