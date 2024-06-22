@@ -35,22 +35,19 @@ namespace Clinic.Models
         }
         public ClinicDbContext(DbContextOptions<ClinicDbContext> options) : base(options)
         {
-            var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-            if (dbCreater != null)
-            {
-                // Create Database 
-                if (!dbCreater.CanConnect())
-                {
-                    dbCreater.Create();
-                }
-
-                // Create Tables
-                if (!dbCreater.HasTables())
-                {
-                    dbCreater.CreateTables();
-                }
-            }
+            //try
+            //{
+            //    var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            //    Console.WriteLine(dbCreater);
+            //}
+            //catch (Exception ex)
+            //{
+             
+            //    Console.WriteLine($"An error occurred while setting up the database: {ex.Message}");
+            //    throw;
+            //}
         }
+
         public ClinicDbContext() : base()
         {
 

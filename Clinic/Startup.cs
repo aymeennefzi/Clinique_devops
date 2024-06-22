@@ -26,7 +26,7 @@ public class Startup
         var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
         var dbName = Environment.GetEnvironmentVariable("DB_NAME"); ;
         var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD"); ;
-        var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};Trusted_Connection=True; MultipleActiveResultSets=true";
+        var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};";
         // Add the database context
         services.AddDbContext<ClinicDbContext>(options =>options.UseSqlServer(connectionString));
 
