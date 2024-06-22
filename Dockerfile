@@ -3,6 +3,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /home/app
 EXPOSE 80
 
+# Stage 2: Build Image
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+
 # Copy solution and project files for restoring dependencies
 COPY ["Clinic.sln", "./"]
 COPY ["Clinic/Clinic.csproj", "Clinic/"]
@@ -11,7 +16,7 @@ RUN dotnet restore "Clinic/Clinic.csproj"
 # Copy the remaining files and build the project
 COPY . .
 WORKDIR /src/Clinic
-RUN dotnet build -c Release -o /app/build
+RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
 # Stage 3: Publish Image
 FROM build AS publish
