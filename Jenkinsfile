@@ -47,15 +47,15 @@ pipeline {
                 // step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'scanner', variable: 'SONAR_TOKEN')]) {
-                    script {
-                        sh "docker run --rm -e SONAR_TOKEN=$SONAR_TOKEN -v ${WORKSPACE}:/usr/src -w /usr/src sonarsource/sonar-scanner-cli sonar-scanner -Dsonar.projectKey=Clinique_project -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_TOKEN"
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'scanner', variable: 'SONAR_TOKEN')]) {
+        //             script {
+        //                 sh "docker run --rm -e SONAR_TOKEN=$SONAR_TOKEN -v ${WORKSPACE}:/usr/src -w /usr/src sonarsource/sonar-scanner-cli sonar-scanner -Dsonar.projectKey=Clinique_project -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_TOKEN"
+        //             }
+        //         }
+        //     }
+        // }
         stage('Publish Artifacts') {
             steps {
                 script {
@@ -71,13 +71,13 @@ pipeline {
                  }
              }
         }
-       stage('Docker compose') {
-           steps {
-               script {
-                   sh 'docker-compose up --build'
-               }
-           }
-       }
+    //    stage('Docker compose') {
+    //        steps {
+    //            script {
+    //                sh 'docker-compose up --build'
+    //            }
+    //        }
+    //    }
         
     }
 }
