@@ -18,7 +18,6 @@ RUN dotnet restore "Clinic/Clinic.csproj"
 COPY . .
 
 # Copy the remaining files and build the project
-COPY . .
 WORKDIR /src/Clinic
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
@@ -28,18 +27,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src/Clinic
 RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Stage 4: Migration Image
-FROM build AS migrations
-RUN dotnet tool install --version 6.0.0 --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
-WORKDIR /src
-COPY . .
-RUN dotnet ef migrations add first1 --project Clinic.csproj --startup-project Clinic.csproj
-
-# Command to update the database
-RUN dotnet ef database update --project Clinic.csproj --startup-project Clinic.csproj
-
-# Stage 5: Final Image
+# Stage 4: Final Image
 FROM base AS final
 WORKDIR /home/app
 COPY --from=publish /app/publish .
