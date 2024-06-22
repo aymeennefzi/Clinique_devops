@@ -74,7 +74,7 @@ pipeline {
        stage('Docker compose') {
            steps {
                script {
-                   sh 'docker-compose up '
+                   sh 'docker compose up -d --force-recreate'
                }
            }
        }
