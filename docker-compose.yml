@@ -16,6 +16,8 @@ services:
         - cliniqueSysApp
     volumes:
       - db_data:/var/lib/mysql
+      - data_protection_keys:/root/.aspnet/DataProtection-Keys
+
 
   clinic:
     container_name: clinique-app
@@ -34,3 +36,4 @@ services:
         - cliniqueSysApp
 volumes:
   db_data: 
+  data_protection_keys:
