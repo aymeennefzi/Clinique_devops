@@ -14,6 +14,8 @@ WORKDIR /src
 COPY ["Clinic.sln", "./"]
 COPY ["Clinic/Clinic.csproj", "Clinic/"]
 RUN dotnet restore "Clinic/Clinic.csproj"
+# Copie des autres fichiers
+COPY . .
 
 # Copy the remaining files and build the project
 COPY . .
