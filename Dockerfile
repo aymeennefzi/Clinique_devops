@@ -26,3 +26,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Clinic.dll"]
+
+COPY ["Clinic.sln", "./"]
+COPY ["Clinic/Clinic.csproj", "Clinic/"]
