@@ -19,13 +19,13 @@ WORKDIR /src/Clinic
 RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
 # Stage 3: Publish Image
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src/Clinic
-RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-# Stage 4: Final Image
-FROM base AS final
-WORKDIR /home/app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Clinic.dll"]
+#FROM build AS publish
+#ARG BUILD_CONFIGURATION=Release
+#WORKDIR /src/Clinic
+#RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+#
+## Stage 4: Final Image
+#FROM base AS final
+#WORKDIR /home/app
+#COPY --from=publish /app/publish .
+#ENTRYPOINT ["dotnet", "Clinic.dll"]

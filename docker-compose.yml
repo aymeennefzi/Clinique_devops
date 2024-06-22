@@ -33,4 +33,4 @@ services:
     networks:
         - cliniqueSysApp
 volumes:
-  db_data: 
+  db_data: ls
