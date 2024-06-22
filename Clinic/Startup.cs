@@ -1,7 +1,6 @@
 ﻿using Clinic.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,17 +15,15 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
-    public void ConfigureServices(IServiceCollection services) { 
-        services.AddDataProtection()
-        .PersistKeysToFileSystem(new DirectoryInfo(@"/var/data-protection-keys/"))
-        .SetApplicationName("MyApp");
+    public void ConfigureServices(IServiceCollection services)
 
-    services.AddControllersWithViews();
         
     {
         
-        //services.AddMetrics();
-
+        services.AddMetrics();
+        services.AddDataProtection();
+      
+        services.AddControllersWithViews();
 
         var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
         var dbName = Environment.GetEnvironmentVariable("DB_NAME"); ;
