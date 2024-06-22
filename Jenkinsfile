@@ -64,20 +64,20 @@ pipeline {
                 archiveArtifacts artifacts: 'publish/**/*', allowEmptyArchive: true
             }
         }
-        stage('Build Docker Image') {
-             steps {
-                 script {
-                     def dockerImage=docker.build("clynicsys_management" , "-f Dockerfile .")
-                 }
-             }
-        }
-    //    stage('Docker compose') {
-    //        steps {
-    //            script {
-    //                sh 'docker-compose up --build'
-    //            }
-    //        }
-    //    }
+        // stage('Build Docker Image') {
+        //      steps {
+        //          script {
+        //              def dockerImage=docker.build("clynicsys_management" , "-f Dockerfile .")
+        //          }
+        //      }
+        // }
+       stage('Docker compose') {
+           steps {
+               script {
+                   sh 'docker-compose up --build'
+               }
+           }
+       }
         
     }
 }
