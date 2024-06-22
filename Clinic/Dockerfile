@@ -18,7 +18,7 @@ RUN dotnet restore "Clinic/Clinic.csproj"
 # Copy the remaining files and build the project
 COPY . .
 WORKDIR /src/Clinic
-RUN dotnet build "Clinic/Clinic.csproj" -c Release -o /app/build
+RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
 
 # Stage 3: Publish Image
 FROM build AS publish
