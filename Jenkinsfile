@@ -67,7 +67,7 @@ pipeline {
         stage('Build Docker Image') {
              steps {
                  script {
-                     def dockerImage=docker.build("clynicsys_management" , "-f Dockerfile .")
+                     def dockerImage=docker.build("clynicsys_management" , "-f Clinic/Dockerfile .")
                  }
              }
         }
