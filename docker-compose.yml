@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-        - 8081:80 
+        - 8082:80 
     depends_on:
         - clinicdb
     environment:
@@ -33,4 +33,4 @@ services:
     networks:
         - cliniqueSysApp
 volumes:
-  db_data: ls
+  db_data: 
