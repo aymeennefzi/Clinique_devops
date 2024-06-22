@@ -8,8 +8,8 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 # Copy solution and project files for restoring dependencies
-COPY "Clinic.sln", "."
-COPY "Clinic/Clinic.csproj", "./Clinic"
+COPY ["Clinic.sln", "./"]
+COPY ["Clinic/Clinic.csproj", "Clinic/"]
 RUN dotnet restore "Clinic/Clinic.csproj"
 
 # Copy the remaining files and build the project
