@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using System.Text.RegularExpressions;
 
 namespace Clinic.Models
 {
     public class ClinicDbContext : DbContext
     {
-
        
         public DbSet<Categorie>? Categories { get; set; }
         public DbSet<Employee>? Employee { get; set; }
@@ -35,19 +32,8 @@ namespace Clinic.Models
         }
         public ClinicDbContext(DbContextOptions<ClinicDbContext> options) : base(options)
         {
-            //try
-            //{
-            //    var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-            //    Console.WriteLine(dbCreater);
-            //}
-            //catch (Exception ex)
-            //{
-             
-            //    Console.WriteLine($"An error occurred while setting up the database: {ex.Message}");
-            //    throw;
-            //}
+            
         }
-
         public ClinicDbContext() : base()
         {
 

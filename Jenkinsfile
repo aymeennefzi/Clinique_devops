@@ -37,25 +37,25 @@ pipeline {
                 }
             }
         }
-        // stage('Run Unit Tests') {
-        //     steps {
-        //         script {
-        //             def testResultsDir = "${WORKSPACE}/test-results"
-        //             sh "mkdir -p ${testResultsDir}" 
-        //             sh "dotnet test Clinic.sln --logger trx --results-directory ${testResultsDir}" 
-        //         }
-        //         // step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
-        //     }
-        // }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withCredentials([string(credentialsId: 'scanner', variable: 'SONAR_TOKEN')]) {
-        //             script {
-        //                 sh "docker run --rm -e SONAR_TOKEN=$SONAR_TOKEN -v ${WORKSPACE}:/usr/src -w /usr/src sonarsource/sonar-scanner-cli sonar-scanner -Dsonar.projectKey=Clinique_project -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_TOKEN"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Run Unit Tests') {
+            steps {
+                script {
+                    def testResultsDir = "${WORKSPACE}/test-results"
+                    sh "mkdir -p ${testResultsDir}" 
+                    sh "dotnet test Clinic.sln --logger trx --results-directory ${testResultsDir}" 
+                }
+                // step([$class: 'MSTestPublisher', testResultsFile: "${WORKSPACE}/test-results/*.trx"])
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'scanner', variable: 'SONAR_TOKEN')]) {
+                    script {
+                        sh "docker run --rm -e SONAR_TOKEN=$SONAR_TOKEN -v ${WORKSPACE}:/usr/src -w /usr/src sonarsource/sonar-scanner-cli sonar-scanner -Dsonar.projectKey=Clinique_project -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_TOKEN"
+                    }
+                }
+            }
+        }
         stage('Publish Artifacts') {
             steps {
                 script {
@@ -64,13 +64,7 @@ pipeline {
                 archiveArtifacts artifacts: 'publish/**/*', allowEmptyArchive: true
             }
         }
-        // stage('Build Docker Image') {
-        //      steps {
-        //          script {
-        //              def dockerImage=docker.build("clynicsys_management" , "-f Dockerfile .")
-        //          }
-        //      }
-        // }
+        
        stage('Docker compose') {
            steps {
                script {

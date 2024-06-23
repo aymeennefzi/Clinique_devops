@@ -16,24 +16,21 @@ services:
         - cliniqueSysApp
     volumes:
       - db_data:/var/lib/mysql
-      - data_protection_keys:/root/.aspnet/DataProtection-Keys
-
 
   clinic:
     container_name: clinique-app
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Clinic/Dockerfile
     ports:
         - 8082:80 
     depends_on:
         - clinicdb
     environment:
-        - DB_HOST=http://172.16.1.70:8082
+        - DB_HOST=clinicdb
         - DB_NAME=cliniqueApp
         - DB_PASSWORD= password-123@
     networks:
         - cliniqueSysApp
 volumes:
   db_data: 
-  data_protection_keys:
